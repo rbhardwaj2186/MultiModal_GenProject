@@ -1,116 +1,98 @@
-# 🎯 MultiModal GenProject
+# Video Enhancement & Processing ML System *(Python, PyTorch, FastAPI, OpenCV, CNN)*
 
-> An AI-powered multimodal generation application using FastAPI and Streamlit, demonstrating text, audio, and image generation using state-of-the-art generative AI models.
+An AI-powered video enhancement system using deep learning and FastAPI, demonstrating real-time video processing and quality improvement through state-of-the-art CNN architectures.
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://streamlit.io)
-[![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100.0+-green.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## ✨ Features
 
-* **Text Generation** - Conversational chatbot functionality powered by state-of-the-art language models
-* **Audio Generation** - Speech synthesis with customizable voice presets for natural-sounding audio
-* **Image Generation** - Text-to-image synthesis using advanced diffusion models
-* **Interactive Frontend** - User-friendly interface built with Streamlit
-* **REST API** - Robust FastAPI backend for seamless integration
+- **Deep Learning Video Enhancement** - Frame-by-frame video processing using custom CNN architecture
+- **Real-time Processing** - Optimized pipeline with frame skipping and batched inference
+- **RESTful API** - Robust FastAPI backend with Pydantic validation
+- **Resource Optimization** - Configurable enhancement levels and memory management
 
 ## 🏗️ Project Structure
 
 ```
-MultiModal_GenProject/
+video-enhancement-ml/
 │
 ├── app/
 │   ├── __init__.py           # Package initialization
-│   ├── aclient.py            # Streamlit audio generation client
-│   ├── client.py             # Streamlit text generation client
-│   ├── main.py               # FastAPI server
-│   ├── models.py             # Model inference logic
-│   ├── schemas.py            # Input validation schemas
-│   ├── utils.py              # Audio/image processing utilities
-│   └── vclient.py            # Streamlit image generation client
+│   ├── main.py              # FastAPI server
+│   ├── models.py            # PyTorch CNN model
+│   ├── schemas.py           # Pydantic schemas
+│   └── utils.py             # Video processing utilities
 │
-├── .env                      # Environment variables
+├── tests/                   # Unit and integration tests
+├── .env                     # Environment variables
 ├── .gitignore               
-└── requirements.txt          # Project dependencies
+└── requirements.txt         # Project dependencies
 ```
 
 ## 🚀 Quick Start
 
 1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/your-username/MultiModal_GenProject.git
-   cd MultiModal_GenProject
-   ```
+```bash
+git clone https://github.com/your-username/video-enhancement-ml.git
+cd video-enhancement-ml
+```
 
 2. **Set Up Virtual Environment**
-   ```bash
-   python -m venv env
-   source env/bin/activate  # Windows: .\env\Scripts\activate
-   ```
+```bash
+python -m venv env
+source env/bin/activate  # Windows: .\env\Scripts\activate
+```
 
 3. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+pip install -r requirements.txt
+```
 
-4. **Configure Environment**
-   Create a `.env` file:
-   ```env
-   HF_TOKEN=your_hugging_face_token
-   ```
-
-5. **Launch the Server**
-   ```bash
-   python -m uvicorn app.main:app --reload
-   ```
-
-6. **Run Streamlit Clients**
-   ```bash
-   # Text Generation
-   streamlit run app/client.py
-   
-   # Audio Generation
-   streamlit run app/aclient.py
-   
-   # Image Generation
-   streamlit run app/vclient.py
-   ```
+4. **Launch the Server**
+```bash
+python -m uvicorn app.main:app --reload
+```
 
 ## 🛣️ API Endpoints
 
-| Endpoint | Description | Input | Output |
-|----------|-------------|-------|--------|
-| `/generate/text` | Text generation | `prompt` | JSON (text response) |
-| `/generate/audio` | Audio synthesis | `prompt`, `preset` | WAV audio file |
-| `/generate/image` | Text-to-image | `prompt` | PNG image |
-| `/` | API documentation | None | OpenAPI Docs |
+| Endpoint | Method | Description | Input | Output |
+|----------|---------|-------------|--------|---------|
+| `/enhance-video/` | POST | Video enhancement | video file, config | JSON (metadata) |
+| `/` | GET | API documentation | None | OpenAPI Docs |
 
 ## 💡 Example Usage
 
-### Text Generation
-```bash
-curl "http://localhost:8000/generate/text?prompt=Hello,%20how%20are%20you?"
+```python
+import requests
+
+# Enhance video
+files = {'video': open('input.mp4', 'rb')}
+config = {'enhancement_level': 1.5, 'frame_skip': 2}
+
+response = requests.post(
+    'http://localhost:8000/enhance-video/',
+    files=files,
+    data={'config': json.dumps(config)}
+)
 ```
 
-### Audio Generation
-```bash
-curl "http://localhost:8000/generate/audio?prompt=Hello,%20world&preset=v2/en_speaker_1" \
-     --output audio.wav
-```
+## 🧬 Model Architecture
 
-### Image Generation
-```bash
-curl "http://localhost:8000/generate/image?prompt=A%20sunset%20over%20mountains" \
-     --output image.png
-```
+The video enhancement model utilizes a custom CNN architecture:
+- 3 convolutional layers with batch normalization
+- ReLU activation functions
+- Residual connections for stable training
+- Optimized for real-time processing
 
 ## 💼 Business Impact
 
-* **Enhanced User Engagement** - Multimodal outputs create immersive experiences
-* **Content Personalization** - Customizable voices and high-quality images
-* **Scalable AI Foundation** - Perfect for virtual assistants and creative content generation
-* **Rapid Development** - FastAPI's performance meets Streamlit's simplicity
+- **Quality Enhancement** - Improved video quality through deep learning
+- **Resource Efficiency** - Optimized for performance in constrained environments
+- **Scalable Solution** - Ready for production deployment with proper error handling
+- **API Integration** - Easy integration with existing systems
 
 ## 🤝 Contributing
 
@@ -124,7 +106,6 @@ We welcome contributions! Here's how you can help:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
----
-Made with ❤️ using FastAPI and Streamlit
+Made with ❤️ using PyTorch, FastAPI, and OpenCV.

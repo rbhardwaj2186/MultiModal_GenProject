@@ -1,15 +1,16 @@
 MultiModal_GenProject/
 │
 ├── app/
-│   ├── __init__.py           # Package initialization file.
-│   ├── aclient.py            # Streamlit client for audio generation.
-│   ├── client.py             # Streamlit client for text generation.
-│   ├── main.py               # FastAPI server handling text, audio, and image generation endpoints.
-│   ├── models.py             # Model loading and generation logic for text, audio, and images.
-│   ├── schemas.py            # Schema definitions for input validation (e.g., audio presets).
-│   ├── utils.py              # Utility functions for handling audio and image processing.
-│   ├── vclient.py            # Streamlit client for image generation.
-│
-├── .env                      # Environment variables (e.g., Hugging Face token).
-├── .gitignore                # Files and directories to be ignored by Git.
-├── requirements.txt          # Python dependencies for the project.
+│   ├── __init__.py
+│   ├── aclient.py            # Streamlit audio client
+│   ├── client.py             # Streamlit text client
+│   ├── vclient.py            # Streamlit image/video client
+│   ├── video_client.py       # (Optional) Streamlit video enhancement client
+│   ├── main.py               # FastAPI server (enhance-video endpoint)
+│   ├── models.py             # Text/audio/image models
+│   ├── video_models.py       # (New) Video enhancement model and logic
+│   ├── schemas.py            # Input validation schemas
+│   ├── utils.py              # Audio/image processing utilities
+├── .env
+├── .gitignore
+└── requirements.txt          # Project dependencies
